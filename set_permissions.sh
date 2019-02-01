@@ -3,5 +3,8 @@
 chown -R "$USER:$USER" "$HOME/CS1XA3"
 
 chmod -R 755 "$HOME/CS1XA3/public_html"
+<<<<<<< HEAD
 chmod 700 "$HOME/CS1XA3/private"
-chmod 755 README.md
+=======
+chmod -rw-r-r- README.md
+>>>>>>> beta
