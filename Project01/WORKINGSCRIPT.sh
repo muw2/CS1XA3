@@ -35,4 +35,5 @@ echo -n "Which sport do you like?"
 read sport
 echo "Hello my friend $name, I know you are a $age year old $gender, and you like playing $sport. Now we are friends!"
 
-
+#5.2 Create a TODO Log
+git grep -EI "TODO" >todo.log
