@@ -37,6 +37,15 @@ echo "Hello my friend $name, I know you are a $age year old $gender. Now we are 
 
 git grep -EI "TODO" >todo.log
 
+#5.6 Delete Temporary Files
+
+git clean -n
+echo "Are you sure to delete the files above, if yes enter 1 no enter 2"
+read a
+if [ $a eq 1 ]; then
+	git clean -f
+fi
+
 #Custom Feature 1
 
 tm=$(date +%H)
