@@ -7,6 +7,11 @@
 #I touch a todo.log first.
 #Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
 
+#5.6 Delete Temporary Files
+#list all untracked files
+#ask the user to make sure to delete the files
+#delete a;; untracked files
+
 #Custom Feature 1
 #output time and say hello to the user according to the time in blue.
 
