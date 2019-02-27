@@ -36,4 +36,23 @@ read sport
 echo "Hello my friend $name, I know you are a $age year old $gender, and you like playing $sport. Now we are friends!"
 
 #5.2 Create a TODO Log
+
 git grep -EI "TODO" >todo.log
+
+#Custom Feature
+
+num=$[RANDOM%100+1]
+while :
+do
+	read -p "There is a number between 1 and 100, you think the number is: " m
+	if [ $m -eq $num ]; then
+		echo "Congratulations! You get the number!"
+		exit
+	elif [ $m -gt $num ]; then
+		echo "Ooooooops, the number is less than what you guess."
+	else 
+		echo "Ooooh, the number is greater than what you guess."
+	fi
+done
+
+
