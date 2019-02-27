@@ -7,6 +7,9 @@
 #I touch a todo.log first.
 #Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
 
+#5.5 File Type Count
+#print file type and find how many files
+
 #5.6 Delete Temporary Files
 #list all untracked files
 #ask the user to make sure to delete the files
