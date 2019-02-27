@@ -1,8 +1,2 @@
-README.md:#5.2 Create a TODO Log
-README.md:#Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
-project_analyze.sh:#5.2 Create a TODO Log
-project_analyze.sh:git grep -EI "TODO" >todo.log
-todo.log:README.md:#5.2 Create a TODO Log
-todo.log:README.md:#Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
-todo.log:project_analyze.sh:#5.2 Create a TODO Log
-todo.log:project_analyze.sh:git grep -EI "TODO" >todo.log
+find . -name "*" -type f -exec grep "#TODO" {} \;>todo.log
+#Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.

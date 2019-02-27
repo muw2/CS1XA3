@@ -37,6 +37,10 @@ echo "Hello my friend $name, I know you are a $age year old $gender. Now we are 
 
 git grep -EI "TODO" >todo.log
 
+#5.3 Compile Error Log
+
+find . -name  "*.hs" -type f -exec ghc -fno-code {} \;&>compile_fail.log
+
 #5.5 File Type Count
 echo "HTML: $(find /home/muw2 -iname "*.html" |wc -l), Javascript: $(find /home/muw2 -iname "*.js" | wc -l), CSS: $(find /home/muw2 -iname "*.css" | wc -l), Python: $(find /home/muw2 -iname "*.py" | wc -l), Haskell: $(find /home/muw2 -iname "*.hs" | wc -l), Bash Script: $(find /home/muw2 -iname "*.sh" | wc -l)"
 
