@@ -35,7 +35,7 @@ echo "Hello my friend $name, I know you are a $age year old $gender. Now we are 
 
 #5.2 Create a TODO Log
 
-git grep -EI "TODO" >todo.log
+grep -r "#TODO" . --exclude={todo.log,project_analyze.sh}>todo.log
 
 #5.3 Compile Error Log
 

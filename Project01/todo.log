@@ -1,2 +1,1 @@
-find . -name "*" -type f -exec grep "#TODO" {} \;>todo.log
-#Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
+./README.md:#Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
