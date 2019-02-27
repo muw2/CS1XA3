@@ -2,3 +2,7 @@ README.md:#5.2 Create a TODO Log
 README.md:#Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
 WORKINGSCRIPT.sh:#5.2 Create a TODO Log
 WORKINGSCRIPT.sh:git grep -EI "TODO" >todo.log
+todo.log:README.md:#5.2 Create a TODO Log
+todo.log:README.md:#Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
+todo.log:WORKINGSCRIPT.sh:#5.2 Create a TODO Log
+todo.log:WORKINGSCRIPT.sh:git grep -EI "TODO" >todo.log

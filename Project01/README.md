@@ -7,7 +7,10 @@
 #I touch a todo.log first.
 #Secondly, I put each line of every file in my repo with the tag #TODO into a file todo.log.
 
-#Custom Feature
+#Custom Feature 1
+#output time and say hello to the user according to the time in blue.
+
+#Custom Feature 2
 #The computer will create a random number between 1 and 100, the user can guess the number.
 #The user can get tips for the number the user guess is greater or less than the number.
 

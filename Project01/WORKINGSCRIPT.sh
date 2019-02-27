@@ -8,15 +8,15 @@ echo "Hello, "$USER". Do you want to check a number is positive or negative, odd
 echo -n "Please enter an integer and press [ENTER]"
 read int
 
-if [$int -eq 0]; then
+if [ $int -eq 0 ]; then
 	echo "$int is zero"
 else
-	if [$int -lt 0]; then
+	if [ $int -lt 0 ]; then
 		echo "$int is negative."
 	else 
 		echo "$int is positive."
 	fi
-	if [$((int % 2)) -eq 0]; then
+	if [ $((int % 2)) -eq 0 ]; then
 		echo "$int is even."
 	else 
 		echo "$int is odd"
@@ -31,15 +31,27 @@ echo -n "Enter your gender (man or woman) and press [ENTER]"
 read gender
 echo -n "How old are you?"
 read age
-echo -n "Which sport do you like?"
-read sport
-echo "Hello my friend $name, I know you are a $age year old $gender, and you like playing $sport. Now we are friends!"
+echo "Hello my friend $name, I know you are a $age year old $gender. Now we are friends!"
 
 #5.2 Create a TODO Log
 
 git grep -EI "TODO" >todo.log
 
-#Custom Feature
+#Custom Feature 1
+
+tm=$(date +%H)
+
+if [ $tm -le 12 ]; then
+	msg="Good Morning $USER"
+elif [ $tm -gt 12 -a $tm -le 18 ]; then
+	msg="Good Afternoon $USER"
+else
+	msg="Good Night $USER"
+fi
+echo "$(date +"%Y-%m-%d %H:%M:%S")"
+echo -e "\033[34m$msg\033[0m"
+
+#Custom Feature 2
 
 num=$[RANDOM%100+1]
 while :
@@ -54,5 +66,3 @@ do
 		echo "Ooooh, the number is greater than what you guess."
 	fi
 done
-
-
