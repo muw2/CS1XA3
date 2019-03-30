@@ -19,3 +19,18 @@
 
 #For each part I draw a line below the title.
 #there are two colors i used, background is #f2efe6, for the letters is #78756c.
+
+#easy app
+#calculator
+#calculator is an very easy app; however I try to add many features to make it not very easy.
+#calculator for setting the location of the app
+#calwin for setting the blackboard of the calculating
+#showwin for setting the number on the blackboard
+#numberbtn for setting the background color of the numbers and c, +/-, <-], .
+#numbers are active with another color
+#operatebtn for setting the operate background color
+#operates are active with another color.
+#variable calresults is operation results
+#variable results is operation expression
+#variable lastkey is store click value
+#variable flag is changing symbol

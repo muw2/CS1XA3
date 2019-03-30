@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Calculator</title>
+	<style>
+	*{
+		padding:0;
+		margin:1px;
+}
+
+#calculator{
+	margin:auto;
+	margin-top:50px;
+	border-spacing:0;
+}
+
+#calwin{
+	width:100%;
+	max-width:246px;
+	height:60px;
+	background-color:rgb(23,24,32);
+	font-weight:bold;
+	color:#ddd;
+	text-align:right;
+	padding-right:5px;
+}
+
+#showwin{
+	width:100%;
+	max-width:246px;
+	height:30px;
+	background-color:rgb(23,24,53);
+	color:rgb(220,220,221);
+	font-weight:bold;
+	overflow:hidden;
+	text-align:right;
+	padding-right:5px;
+}
+
+.numberbtn{
+	cursor:pointer;
+	width:60px;
+	height:60px;
+	text-align:center;
+	border:0.5px solid rgb(54,54,58);
+	background-color:rgb(55,59,74);
+	color:#fff;
+}
+
+.numberbtn:hover,.numberbtn:active{
+	background-color:rgb(39,40,47);
+}
+
+.operatebtn{
+	cursor:pointer;
+	width:60px;
+	height:60px;
+	text-align:center;
+	border:0.5px solid rgb(54,54,58);
+	background-color:rgb(166,61,70);
+	color:#fff;
+}
+
+.operateben:hover,.operatebtn:active{
+	background-color:rgb(146,53,61);
+}
+
+	</style>
+</head>
+
+<body>
+	<table onclick="Calculator()" id="calculator">
+		<tr>
+			<td colspan="4" id="calwin"> </td>
+		</tr>
+		<tr>
+			<td colspan="4" id="showwin">0</td>
+		</tr>
+		<tr>
+			<td class="numberbtn" id="deletebtn">C</td>
+			<td class="numberbtn">+/-</td>
+			<td class="numberbtn"><-]</td>
+			<td class="operatebtn">/</td>
+		</tr>
+		<tr>
+			<td class="numberbtn">7</td>
+			<td class="numberbtn">8</td>
+			<td class="numberbtn">9</td>
+			<td class="operatebtn">*</td>
+		</tr>
+		<tr>
+			<td class="numberbtn">4</td>
+			<td class="numberbtn">5</td>
+			<td class="numberbtn">6</td>
+			<td class="operatebtn">-</td>
+		</tr>
+		<tr>
+			<td class="numberbtn">1</td>
+			<td class="numberbtn">2</td>
+			<td class="numberbtn">3</td>
+			<td class="operatebtn">+</td>
+		</tr>
+		<tr>
+			<td class="numberbtn" colspan="2">0</td>
+			<td class="numberbtn">.</td>
+			<td class="operatebtn" onclick="resequal()">=</td>
+		</tr>
+	</table>
+
+	<script type="text/javascript">
+		var calresults="";
+		var results="";
+		var results2="";
+		var lastkey="";
+		var flag=1;
+		var re1=/^[\*|\/].+/;
+		var re2=/.+[\*|\/]$/;
+		var re3=/(\+|-|\*|\/)/;
+		
+		function Calculator(){
+			if 
+(event.scrElement.innerText=="="||event.scrElement.id=="showwin"||event.scrElement.id=="calwin"){
+				return;
+			}
+			else if (event.scrElement.innerText=="C"){
+				results="";
+				calresults="";
+				showwin.innerText="0";
+				calwin.innerText="";
+				return;
+			}
+			else if (event.scrElement.innerText=="<-]"){
+				results=results.substr(0,results.length-1);
+				showwin.innerText=results;
+				return;
+			}
+			else if (lastkey.match(re3)&&event.scrElement.innerText.match(re3)){
+				return;
+			}
+			else if (event.scrElement.innerText=="+/-"&&results!=""){
+				if (flag==-1){
+					results=String(results2);
+					showwin.innerText=results;
+					flag=-flag;
+					return;
+				}
+				results2=results;
+				results="-"+results;
+				flag=-flag;
+				showwin.innerText=results;
+				return;
+			}
+			else if (lastkey=="="&&event.scrElement.innerText.match(re3)){
+				results=calresults;
+				results+=event.scrElement.innerText;
+				showwin.innerText=results;
+			}
+			else{
+				results+=event.scrElement.innerText;
+				lastkey=event.scrElement.innerText;
+				showwin.innerText=results;
+			}
+		}
+
+		function resequal(){
+			if (results.match(re1)||results.match(re2)){
+				showwin.innerText="Input Error!";
+				calwin.innerText="";
+				results="";
+				return;
+			}
+			else{
+				calresults=eval(results);
+				showwin.innerText=calresults;
+				calwin.innerText=results;
+				lastkey="=";
+			}
+		}
+
+	</script>
+
+</body>
+</html>
+
+
