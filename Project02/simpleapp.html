@@ -129,14 +129,17 @@
 				calwin.innerText="";
 				return;
 			}
-			else if (event.scrElement.innerText=="<-]"){
+
+			else if (event.srcElement.innerText=="<-]"){
 				results=results.substr(0,results.length-1);
 				showwin.innerText=results;
 				return;
 			}
+
 			else if (lastkey.match(re3)&&event.scrElement.innerText.match(re3)){
 				return;
 			}
+			
 			else if (event.scrElement.innerText=="+/-"&&results!=""){
 				if (flag==-1){
 					results=String(results2);
@@ -150,11 +153,13 @@
 				showwin.innerText=results;
 				return;
 			}
+			
 			else if (lastkey=="="&&event.scrElement.innerText.match(re3)){
 				results=calresults;
 				results+=event.scrElement.innerText;
 				showwin.innerText=results;
 			}
+			
 			else{
 				results+=event.scrElement.innerText;
 				lastkey=event.scrElement.innerText;
