@@ -118,30 +118,30 @@
 		var re3=/(\+|-|\*|\/)/;
 		
 		function Calculator(){
-			if 
-(event.scrElement.innerText=="="||event.scrElement.id=="showwin"||event.scrElement.id=="calwin"){
+			if (event.srcElement.innerText=="="||event.srcElement.id=="showwin"||event.srcElement.id=="calwin") {
 				return;
 			}
-			else if (event.scrElement.innerText=="C"){
+			
+			else if (event.srcElement.innerText=="C") {
 				results="";
 				calresults="";
 				showwin.innerText="0";
 				calwin.innerText="";
 				return;
 			}
-
-			else if (event.scrElement.innerText=="<-]"){
+			
+			else if(event.srcElement.innerText=="<-]") {
 				results=results.substr(0,results.length-1);
 				showwin.innerText=results;
 				return;
 			}
-
-			else if (lastkey.match(re3)&&event.scrElement.innerText.match(re3)){
+			
+			else if (lastkey.match(re3)&&event.srcElement.innerText.match(re3)) {
 				return;
 			}
 			
-			else if (event.scrElement.innerText=="+/-"&&results!=""){
-				if (flag==-1){
+			else if (event.srcElement.innerText=="+/-"&&results!="") {
+				if (flag==-1) {
 					results=String(results2);
 					showwin.innerText=results;
 					flag=-flag;
@@ -154,21 +154,22 @@
 				return;
 			}
 			
-			else if (lastkey=="="&&event.scrElement.innerText.match(re3)){
+			else if (lastkey=="="&&event.srcElement.innerText.match(re3)) {
 				results=calresults;
-				results+=event.scrElement.innerText;
+				results+=event.srcElement.innerText;
 				showwin.innerText=results;
+
 			}
 			
-			else if (event.srcElement.innerText=="."&&results==""){
+			else if (event.srcElement.innerText=="."&&results=="") {
 				results="0"+event.srcElement.innerText;
 				showwin.innerText=results;
 			}
-
+			
 			else{
-				results+=event.scrElement.innerText;
-				lastkey=event.scrElement.innerText;
-				showwin.innerText=results;
+				results+=event.srcElement.innerText;
+				lastkey=event.srcElement.innerText;
+			    showwin.innerText=results;
 			}
 		}
 
