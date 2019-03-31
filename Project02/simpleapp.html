@@ -160,6 +160,11 @@
 				showwin.innerText=results;
 			}
 			
+			else if (event.srcElement.innerText=="."&&results==""){
+				results="0"+event.srcElement.innerText;
+				showwin.innerText=results;
+			}
+
 			else{
 				results+=event.scrElement.innerText;
 				lastkey=event.scrElement.innerText;
