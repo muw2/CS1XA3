@@ -14,3 +14,9 @@
 > get in virtual env
 * pip install -r requirements.txt
 > install requirements from freeze version
+* python manage.py runserver
+> run server 
+
+# config
+
+
