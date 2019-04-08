@@ -1,0 +1,106 @@
+import Browser
+import Html exposing (..)
+import Html.Attributes exposing (..)
+import Html.Events exposing (onInput)
+
+
+
+-- MAIN
+
+
+main =
+  Browser.sandbox { init = init, update = update, view = view }
+
+
+
+-- MODEL
+
+
+type alias Model =
+  { name : String
+  , password : String
+  , passwordAgain : String
+  }
+
+
+init : Model
+init =
+  Model "" "" ""
+
+
+
+-- UPDATE
+
+
+type Msg
+  = Name String
+  | Password String
+  | PasswordAgain String
+
+
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+    Name name ->
+      { model | name = name }
+
+    Password password ->
+      { model | password = password }
+
+    PasswordAgain password ->
+      { model | passwordAgain = password }
+
+
+
+-- VIEW
+
+
+view : Model -> Html Msg
+view model =
+  div []
+    [ viewInput "text" "Name" model.name Name
+    , viewInput "password" "Password" model.password Password
+    , viewInput "password" "Re-enter Password" model.passwordAgain PasswordAgain
+    , viewValidation model
+    ]
+
+
+viewInput : String -> String -> String -> (String -> msg) -> Html msg
+viewInput t p v toMsg =
+  input [ type_ t, placeholder p, value v, onInput toMsg ] []
+
+
+viewValidation : Model -> Html msg
+viewValidation model =
+  if model.password == model.passwordAgain then
+    div [ style "color" "green" ] [ text "OK" ]
+  else
+    div [ style "color" "red" ] [ text "Passwords do not match!" ]
+This is pretty similar to our text field example, just with more fields. Let's walk through how it came to be!
+
+As always, you start out by guessing at the Model. We know there are going to be three text fields, so let's just go with that:
+
+type alias Model =
+  { name : String
+  , password : String
+  , passwordAgain : String
+  }
+Great, seems reasonable. We expect that each of these fields can be changed separately, so our messages should account for each of those scenarios.
+
+type Msg
+  = Name String
+  | Password String
+  | PasswordAgain String
+This means our update is pretty mechanical. Just update the relevant field:
+
+update : Msg -> Model -> Model
+update msg model =
+  case msg of
+    Name name ->
+      { model | name = name }
+
+    Password password ->
+      { model | password = password }
+
+    PasswordAgain password ->
+      { model | passwordAgain = password }
