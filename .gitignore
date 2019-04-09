@@ -1,4 +1,5 @@
 /.idea
 /cs_project3
-/Project03/Project_env
+/Project03/Project_env/
 *.pyc
+/Project03/django_project/db.sqlite3
