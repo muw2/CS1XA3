@@ -9,4 +9,12 @@ from django.views import View
 class UserView(View):
     def get(self, request):
         return HttpResponse("Hello, world. You're at the users get function")
+    
+    def post(self, request):
+        pass
+
+    
+class BilldView(View):
+    def get(self, request):
+        pass
 
