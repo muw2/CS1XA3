@@ -14,6 +14,8 @@
 > get in virtual env
 * pip install -r requirements.txt
 > install requirements from freeze version
+* python manage.py migrate
+> create table for app
 * python manage.py runserver
 > run server 
 
