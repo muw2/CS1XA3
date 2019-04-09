@@ -11,7 +11,14 @@ class UserView(View):
         return HttpResponse("Hello, world. You're at the users get function")
     
     def post(self, request):
-        pass
+        user_name = request.POST.get("username")
+        password1 = request.POST.get("password1")
+        password2 = request.POST.get("password2")
+
+        if password1 != password2:
+            pass
+
+        return HttpResponse(user_name)
 
     
 class BilldView(View):
