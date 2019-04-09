@@ -10,7 +10,7 @@ class User(models.Model):
     password = models.CharField(max_length=64)
 
     class Meta:
-        table_name = 'user'
+        db_table = 'user'
 
 
 class Bill(models.Model):
@@ -21,4 +21,4 @@ class Bill(models.Model):
     user = models.ForeignKey(User, related_name='bills', db_column='user_id')
 
     class Meta:
-        table_name = 'bill'
+        db_table = 'bill'

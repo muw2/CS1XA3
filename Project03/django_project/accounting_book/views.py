@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 
 from django.http import HttpResponse
 from django.views import View
+from models import User,Bill
 
 
 # Create your views here.
@@ -18,7 +19,11 @@ class UserView(View):
         if password1 != password2:
             pass
 
-        return HttpResponse(user_name)
+        user = User(
+            name=user_name,
+            password=password1
+        ).save()
+        return HttpResponse(user.id)
 
     
 class BilldView(View):
