@@ -76,7 +76,7 @@ class BillView(View):
         result = []
         for bill in bills:
             result.append({
-                "amount": bill.amount
+                "amount": bill.amount,
             })
         return success_json(result)
 
