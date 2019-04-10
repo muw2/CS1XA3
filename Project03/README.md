@@ -1,9 +1,7 @@
 # required
 * python 2.7
-* mysql >=5.6
 
 # setUp
-
 * git clone git@github.com:muw2/CS1XA3.git
 > clone git project to local
 * pip install virtualenv
