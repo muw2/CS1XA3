@@ -49,17 +49,17 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="username"/>
+                            <input type="text" class="form-control" placeholder="username" id="register_username"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="password" class="form-control" placeholder="password"/>
+                            <input type="password" class="form-control" placeholder="password" id="register_password"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="password" class="form-control" placeholder="password confirm"/>
+                            <input type="password" class="form-control" placeholder="password confirm" id="register_password2"/>
                         </div>
                     </div>
                 </form>
@@ -118,12 +118,12 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="amount"/>
+                            <input type="text" class="form-control" placeholder="amount" id="bill_amount"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="desc"/>
+                            <input type="text" class="form-control" placeholder="desc" id="bill_desc"/>
                         </div>
                     </div>
                 </form>
@@ -149,24 +149,45 @@
             data: {"username": login_username, "password": login_password},
             cache: false,
             async: false,
-            // headers: {"Content-Type": "application/json"},
             dataType: "json",
             success: function (data) {
-                console.log(data)
                 if (true === data.data) {
-                    alert("yes！");
-                    return true;
+                    alert("login success！");
                 } else {
-                    alert("error" + data.info.message);
-                    return false;
+                    alert( data.info.message);
                 }
+                $('#loginModal').modal('hide')
             },
-            error: function (data) {
-                console.log(data)
-                // alert("server error");
+            error: function () {
+                alert("server error");
             }
         })
 
+    })
+
+    $('#bt_register').click(function () {
+        var register_username = $('#register_username').val()
+        var register_password = $('#register_password').val()
+        var register_password2 = $('#register_password2').val()
+        $.ajax({
+            type: "post",
+            url: host + "/user",
+            data: {"username": register_username, "password1": register_password, "password2": register_password2},
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (true === data.data) {
+                    alert("register success！");
+                } else {
+                    alert( data.info.message);
+                }
+                $('#registerModal').modal('hide')
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
     })
 
     $('#action_logout').click(function () {
@@ -178,12 +199,34 @@
             dataType: "json",
             success: function (data) {
                 if (true === data.data) {
-                    alert("yes！");
-                    return true;
+                    alert("logout success！");
                 } else {
-                    alert("error" + data.info.message);
-                    return false;
+                    alert(data.info.message);
                 }
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
+    })
+
+    $('#bt_bill').click(function () {
+        var bill_amount = $('#bill_amount').val()
+        var bill_desc = $('#bill_desc').val()
+        $.ajax({
+            type: "post",
+            url: host + "/bill",
+            data: {"amount": bill_amount, "desc": bill_desc},
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (true === data.data) {
+                    alert("create success！");
+                } else {
+                    alert( data.info.message);
+                }
+                $('#billModal').modal('hide')
             },
             error: function () {
                 alert("server error");

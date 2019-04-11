@@ -57,11 +57,14 @@ def user_login(request):
     request.session['is_login'] = True
     request.session['user_id'] = user.id
     request.session['user_name'] = user.name
+    request.session.set_expiry(3600)
 
     return success_json(True)
 
 
 def user_logout(request):
+    if not request.session.get('is_login', False):
+        return error_json(message='you have to login!')
     request.session.clear()
     return success_json(True)
 
