@@ -15,13 +15,16 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
             <div class="navbar-form navbar-right">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#loginModal">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#loginModal" id="action_login">
                     LOGIN
                 </button>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#registerModal">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#registerModal" id="action_register">
                     REGISTER
                 </button>
-                <button type="button" class="btn btn-info btn-sm">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#billModal" id="action_create_bill">
+                    ADD BILL
+                </button>
+                <button type="button" class="btn btn-info btn-sm" id="action_logout">
                     LOGOUT
                 </button>
             </div>
@@ -63,7 +66,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="bt_register">Save</button>
             </div>
         </div>
     </div>
@@ -83,23 +86,110 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="username"/>
+                            <input type="text" class="form-control" placeholder="username" id="login_username"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="password" class="form-control" placeholder="password"/>
+                            <input type="password" class="form-control" placeholder="password" id="login_password"/>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">confirm</button>
+                <button type="button" class="btn btn-primary" id="bt_login">confirm</button>
             </div>
         </div>
     </div>
 </div>
 <!--LOGIN MODAL END-->
+
+<!--BILL CREATE MODAL START-->
+<div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="billLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="billLabel">Create Bill</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="amount"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="desc"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="bt_bill">save bill</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--BILL CREATE MODAL END-->
+
+<script>
+    var host = 'http://127.0.0.1:8000/e/muw2/accounting_book'
+
+    $('#bt_login').click(function () {
+        var login_username = $('#login_username').val()
+        var login_password = $('#login_password').val()
+        $.ajax({
+            type: "post",
+            url: host + "/user/login",
+            data: {"username": login_username, "password": login_password},
+            cache: false,
+            async: false,
+            // headers: {"Content-Type": "application/json"},
+            dataType: "json",
+            success: function (data) {
+                console.log(data)
+                if (true === data.data) {
+                    alert("yes！");
+                    return true;
+                } else {
+                    alert("error" + data.info.message);
+                    return false;
+                }
+            },
+            error: function (data) {
+                console.log(data)
+                // alert("server error");
+            }
+        })
+
+    })
+
+    $('#action_logout').click(function () {
+        $.ajax({
+            type: "get",
+            url: host + "/user/logout",
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (true === data.data) {
+                    alert("yes！");
+                    return true;
+                } else {
+                    alert("error" + data.info.message);
+                    return false;
+                }
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
+    })
+</script>
 </body>
 </html>
