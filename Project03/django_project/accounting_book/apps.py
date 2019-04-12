@@ -10,6 +10,11 @@ class AccountingBookConfig(AppConfig):
 
 
 def success_json(data):
+    """
+    return success json data
+    :param data:
+    :return:
+    """
     dct = {
         "data": data,
         "info": {
@@ -19,12 +24,18 @@ def success_json(data):
         }
     }
 
-    return JsonResponse(dct)
+    return _allow_json(JsonResponse(dct))
 
 
 def error_json(message, code=-1):
+    """
+    return error message
+    :param message:
+    :param code:
+    :return:
+    """
     dct = {
-        "data": '',
+        "data": False,
         "info": {
             "code": code,
             "error": True,
@@ -32,5 +43,15 @@ def error_json(message, code=-1):
         }
     }
 
-    return JsonResponse(dct)
+    return _allow_json(JsonResponse(dct))
+
+
+def _allow_json(response):
+    """
+    add header for ajax
+    :param response:
+    :return:
+    """
+    response.__setitem__('Access-Control-Allow-Origin', '*')
+    return response
 

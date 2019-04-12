@@ -15,13 +15,16 @@
     <div class="container-fluid">
         <div class="collapse navbar-collapse">
             <div class="navbar-form navbar-right">
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#loginModal">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#loginModal" id="action_login">
                     LOGIN
                 </button>
-                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#registerModal">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#registerModal" id="action_register">
                     REGISTER
                 </button>
-                <button type="button" class="btn btn-info btn-sm">
+                <button type="button" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#billModal" id="action_create_bill">
+                    ADD BILL
+                </button>
+                <button type="button" class="btn btn-info btn-sm" id="action_logout">
                     LOGOUT
                 </button>
             </div>
@@ -30,7 +33,19 @@
 </nav>
 
 <div style="height: 50px;"></div>
+<table class="table table-hover">
+      <thead>
+        <tr>
+          <th>amount</th>
+          <th>create time</th>
+          <th>desc</th>
+          <th>username</th>
+        </tr>
+      </thead>
+      <tbody id="bill_list">
 
+      </tbody>
+    </table>
 <div style="height: 1500px;"></div>
 
 <!--REGISTER MODAL START-->
@@ -46,24 +61,24 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="username"/>
+                            <input type="text" class="form-control" placeholder="username" id="register_username"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="password" class="form-control" placeholder="password"/>
+                            <input type="password" class="form-control" placeholder="password" id="register_password"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="password" class="form-control" placeholder="password confirm"/>
+                            <input type="password" class="form-control" placeholder="password confirm" id="register_password2"/>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">Save</button>
+                <button type="button" class="btn btn-primary" id="bt_register">Save</button>
             </div>
         </div>
     </div>
@@ -83,23 +98,185 @@
                 <form class="form-horizontal">
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="text" class="form-control" placeholder="username"/>
+                            <input type="text" class="form-control" placeholder="username" id="login_username"/>
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-md-5">
-                            <input type="password" class="form-control" placeholder="password"/>
+                            <input type="password" class="form-control" placeholder="password" id="login_password"/>
                         </div>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary">confirm</button>
+                <button type="button" class="btn btn-primary" id="bt_login">confirm</button>
             </div>
         </div>
     </div>
 </div>
 <!--LOGIN MODAL END-->
+
+<!--BILL CREATE MODAL START-->
+<div class="modal fade" id="billModal" tabindex="-1" role="dialog" aria-labelledby="billLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title" id="billLabel">Create Bill</h4>
+            </div>
+            <div class="modal-body">
+                <form class="form-horizontal">
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="amount" id="bill_amount"/>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <div class="col-md-5">
+                            <input type="text" class="form-control" placeholder="desc" id="bill_desc"/>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" id="bt_bill">save bill</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!--BILL CREATE MODAL END-->
+
+<script>
+    var host = 'https://mac1xa3.ca/e/muw2/accounting_book'
+    // var host = 'http://127.0.0.1:8000/e/muw2/accounting_book'
+
+    $('#bt_login').click(function () {
+        var login_username = $('#login_username').val()
+        var login_password = $('#login_password').val()
+        $.ajax({
+            type: "post",
+            url: host + "/user/login",
+            data: {"username": login_username, "password": login_password},
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (true === data.data) {
+                    alert("login success！");
+                } else {
+                    alert( data.info.message);
+                }
+                $('#loginModal').modal('hide')
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
+
+    })
+
+    $('#bt_register').click(function () {
+        var register_username = $('#register_username').val()
+        var register_password = $('#register_password').val()
+        var register_password2 = $('#register_password2').val()
+        $.ajax({
+            type: "post",
+            url: host + "/user",
+            data: {"username": register_username, "password1": register_password, "password2": register_password2},
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (true === data.data) {
+                    alert("register success！");
+                } else {
+                    alert( data.info.message);
+                }
+                $('#registerModal').modal('hide')
+                clearBillData()
+                getBillData()
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
+    })
+
+    $('#action_logout').click(function () {
+        $.ajax({
+            type: "get",
+            url: host + "/user/logout",
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (true === data.data) {
+                    alert("logout success！");
+                } else {
+                    alert(data.info.message);
+                }
+                clearBillData()
+                getBillData()
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
+    })
+
+    $('#bt_bill').click(function () {
+        var bill_amount = $('#bill_amount').val()
+        var bill_desc = $('#bill_desc').val()
+        $.ajax({
+            type: "post",
+            url: host + "/bill",
+            data: {"amount": bill_amount, "desc": bill_desc},
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                if (true === data.data) {
+                    alert("create success！");
+                } else {
+                    alert( data.info.message);
+                }
+                $('#billModal').modal('hide')
+                clearBillData()
+                getBillData()
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
+    })
+    
+    function getBillData() {
+        $.ajax({
+            type: "get",
+            url: host + "/bill",
+            cache: false,
+            async: false,
+            dataType: "json",
+            success: function (data) {
+                data.data.forEach(function (value, index) {
+                    var tr = "<tr><th>" + value.amount + "</th><th>" + value.create_time + "</th><th>" + value.desc + "</th><th>" + value.user_name + "</th></tr>"
+                    $('#bill_list').append(tr)
+                })
+            },
+            error: function () {
+                alert("server error");
+            }
+        })
+    }
+
+    function clearBillData() {
+        $('#bill_list').empty()
+    }
+
+    getBillData()
+</script>
 </body>
 </html>
