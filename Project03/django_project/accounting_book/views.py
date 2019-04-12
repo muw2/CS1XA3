@@ -71,15 +71,25 @@ def user_logout(request):
 
 class BillView(View):
     def get(self, request):
+        fake_data = {
+            'amount': '***',
+            'desc': '***',
+            'create_time': '***',
+            'user_name': "***"
+        }
+
         if not request.session.get('is_login', None):
-            return error_json(message='you have to login!')
+            return success_json([fake_data] * 3)
 
         user_id = request.session.get('user_id')
         bills = Bill.objects.filter(user_id=user_id).all()
         result = []
         for bill in bills:
             result.append({
-                "amount": bill.amount,
+                'amount': bill.amount,
+                'desc': bill.desc,
+                'create_time': bill.create_time.strftime('%Y-%m-%d'),
+                'user_name': request.session.get('user_name')
             })
         return success_json(result)
 
