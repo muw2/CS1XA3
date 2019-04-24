@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # required
 * python 2.7
 
@@ -18,3 +19,6 @@
 > run server
 
 # config
+=======
+
+>>>>>>> 13f92a341dcb0998c87aec5624f6330c6f60f218
