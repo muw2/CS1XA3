@@ -1,6 +1,5 @@
 # setUp
-* pip install virtualenv
-* virtualenv --no-site-packages cs_project3
+* virtualenv
 > create virtual environment for this project
 * source cs_project3/bin/activate
 > get in virtual env
@@ -14,7 +13,15 @@
 > use my bill app
 * register to have an account 
 * login to add bill and look previous bill
+* if not login, the website shows ** instead of bill
 
+* feature
+> use django's built-in session to control user log in and log out
+> The session informmmation is written when thee euser logs in and registers
+> when the bill is created and the bill is read, the user is first checked according to the session
+> use the bootstrap, mmodal, form etc. css classes, to make the webpage rendering
+> base on jquery processing data selection and rendering, using ajax to commplete the situation that the page does not refresh data submission
+> did research during code editing, sometime go to chinese website to find how to resolve problem
 #commend
 * virtualenv
 > install virtualenv
@@ -37,11 +44,9 @@
 > reference https://linuxhint.com/rest_api_python/
 * bootstrap
 > reference https://www.w3schools.com/bootstrap/default.asp
-* middleware in django
-> connect http request and http response
-> process_request
-> process_view
-> process_response
-> process_expection
-* modal
-> 
+* modal (bootstrap)
+> mmodal.js
+> reference http://v3.bootcss.com/javascript/#modals
+* cors
+> Cross-origin resource sharing, which can fix the problem of ajax limitation
+
