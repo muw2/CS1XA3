@@ -49,4 +49,4 @@
 > reference http://v3.bootcss.com/javascript/#modals
 * cors
 > Cross-origin resource sharing, which can fix the problem of ajax limitation
-
+> reference https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS
